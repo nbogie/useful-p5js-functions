@@ -1,3 +1,7 @@
+/*jslint browser: true */
+/*global color, circle,square,random, createVector,createCanvas, windowWidth, windowHeight, rectMode, CENTER, noStroke, fill, push, pop, rotate, translate, background, lerpColor, rect, ellipse, mouseX, mouseY */
+"use strict";
+
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	background(100);
@@ -11,16 +15,16 @@ function draw() {
 }
 
 
-function withProbability(p, fn){
-	if (random() < p){
+function withProbability(p, fn) {
+	if (random() < p) {
 		fn();
 	}
 }
 
 function repeat(n, fn) {
-  for (let i = 0; i < n; i++) {
-    fn();
-  }
+	for (let i = 0; i < n; i++) {
+		fn();
+	}
 }
 
 function repeatRandomChoice(n, arr) {
@@ -29,7 +33,7 @@ function repeatRandomChoice(n, arr) {
 			let chosenFn = random(arr);
 			chosenFn();
 		}
-	} 
+	}
 }
 
 
@@ -37,7 +41,7 @@ function repeatRandomChoice(n, arr) {
 //call fn n times, passing a fraction from 0 to 1
 function repeat0To1(n, fn) {
 	for (let i = 0; i < n; i++) {
-		fn(i / (n-1));
+		fn(i / (n - 1));
 	}
 }
 
@@ -54,29 +58,33 @@ function makeArray(num, makeOneFn) {
 
 
 function distributeUpTo(total, max, fn) {
-    repeat(total, function (ix) {
-        var val = (ix * max) / total;
-        return fn(val);
-    });
+	repeat(total, function(ix) {
+		var val = (ix * max) / total;
+		return fn(val);
+	});
 }
+
 function collectDistributedBetween(numSamples, min, max, fn) {
-    var result = [];
-    distributeBetween(numSamples, min, max, function (v, ix) { return result.push(fn(v, ix)); });
-    return result;
+	var result = [];
+	distributeBetween(numSamples, min, max, function(v, ix) {
+		return result.push(fn(v, ix));
+	});
+	return result;
 }
+
 function distributeBetween(numSamples, min, max, fn) {
-    repeat(numSamples, function (ix) {
-        var range = max - min;
-        var val = min + (ix * range) / numSamples;
-        return fn(val, ix);
-    });
+	repeat(numSamples, function(ix) {
+		var range = max - min;
+		var val = min + (ix * range) / numSamples;
+		return fn(val, ix);
+	});
 }
 
 
 
 //From jeremy douglass: 
 //https://discourse.processing.org/t/how-do-i-cycle-lerp-between-multiple-colors/13441/5
-function lerpColors(amt, colors, colorModeForInterpolation=RGB) {
+function lerpColors(amt, colors, colorModeForInterpolation = RGB) {
 	if (colors.length === 1) {
 		return colors[0];
 	}
@@ -85,29 +93,34 @@ function lerpColors(amt, colors, colorModeForInterpolation=RGB) {
 	return lerpColor(colors[floor(amt / cunit)], colors[ceil(amt / cunit)], amt % cunit / cunit);
 }
 
-function snap(v, gridSize=50) {
+function snap(v, gridSize = 50) {
 	return round(v / gridSize) * gridSize
 }
 
 
 function randomScreenPosition() {
-    return createVector(random(width), random(height));
+	return createVector(random(width), random(height));
 }
+
 function centerScreenPos() {
-    return createVector(width / 2, height / 2);
+	return createVector(width / 2, height / 2);
+}
+
+function mousePos() {
+	return createVector(mouseX, mouseY);
 }
 
 
 function aroundMouse(amt) {
-  return aroundPos(mousePos(), amt);
+	return aroundPos(mousePos(), amt);
 }
 
 function aroundPos(pos, amt) {
-  let v = amt / 2;
-  return {
-    x: pos.x + random(-v, v),
-    y: pos.y + random(-v, v)
-  };
+	let v = amt / 2;
+	return {
+		x: pos.x + random(-v, v),
+		y: pos.y + random(-v, v)
+	};
 }
 
 //mirrorX: position of mirror
@@ -120,5 +133,3 @@ function withSymmetryAround(mirrorX, x, y, drawFn) {
 		drawFn(reflectedX, y);
 	}
 }
-
-
