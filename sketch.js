@@ -23,6 +23,15 @@ function repeat(n, fn) {
   }
 }
 
+//Make an array by calling the given `makeOneFn` function `num` times.
+function makeArray(num, makeOneFn) {
+	let result = [];
+	for (let i = 0; i < num; i++) {
+		result.push(makeOneFn());
+	}
+	return result;
+}
+
 //From jeremy douglass: 
 //https://discourse.processing.org/t/how-do-i-cycle-lerp-between-multiple-colors/13441/5
 function lerpColors(amt, colors, colorModeForInterpolation=RGB) {
