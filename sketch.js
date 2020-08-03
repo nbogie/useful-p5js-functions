@@ -23,6 +23,7 @@ function repeat(n, fn) {
   }
 }
 
+
 //call fn n times, passing a fraction from 0 to 1
 function repeat0To1(n, fn) {
 	for (let i = 0; i < n; i++) {
@@ -40,6 +41,27 @@ function makeArray(num, makeOneFn) {
 	return result;
 }
 
+
+function distributeUpTo(total, max, fn) {
+    repeat(total, function (ix) {
+        var val = (ix * max) / total;
+        return fn(val);
+    });
+}
+function collectDistributedBetween(numSamples, min, max, fn) {
+    var result = [];
+    distributeBetween(numSamples, min, max, function (v, ix) { return result.push(fn(v, ix)); });
+    return result;
+}
+function distributeBetween(numSamples, min, max, fn) {
+    repeat(numSamples, function (ix) {
+        var range = max - min;
+        var val = min + (ix * range) / numSamples;
+        return fn(val, ix);
+    });
+}
+
+
 //From jeremy douglass: 
 //https://discourse.processing.org/t/how-do-i-cycle-lerp-between-multiple-colors/13441/5
 function lerpColors(amt, colors, colorModeForInterpolation=RGB) {
@@ -53,4 +75,12 @@ function lerpColors(amt, colors, colorModeForInterpolation=RGB) {
 
 function snap(v, gridSize=50) {
 	return round(v / gridSize) * gridSize
+}
+
+
+function randomScreenPosition() {
+    return createVector(random(width), random(height));
+}
+function centerScreenPos() {
+    return createVector(width / 2, height / 2);
 }
