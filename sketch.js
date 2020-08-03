@@ -50,3 +50,7 @@ function lerpColors(amt, colors, colorModeForInterpolation=RGB) {
 	colorMode(colorModeForInterpolation);
 	return lerpColor(colors[floor(amt / cunit)], colors[ceil(amt / cunit)], amt % cunit / cunit);
 }
+
+function snap(v, gridSize=50) {
+	return round(v / gridSize) * gridSize
+}
