@@ -27,10 +27,10 @@ function repeat(n, fn) {
 	}
 }
 
-function repeatRandomChoice(n, arr) {
-	if (arr.length > 0) {
+function repeatRandomChoice(n, fns) {
+	if (fns.length > 0) {
 		for (let i = 0; i < n; i++) {
-			let chosenFn = random(arr);
+			let chosenFn = random(fns);
 			chosenFn();
 		}
 	}
@@ -81,7 +81,6 @@ function distributeBetween(numSamples, min, max, fn) {
 }
 
 
-
 //From jeremy douglass: 
 //https://discourse.processing.org/t/how-do-i-cycle-lerp-between-multiple-colors/13441/5
 function lerpColors(amt, colors, colorModeForInterpolation = RGB) {
@@ -98,7 +97,8 @@ function snap(v, gridSize = 50) {
 }
 
 
-function randomScreenPosition() {
+// Positions
+function randomScreenPos() {
 	return createVector(random(width), random(height));
 }
 
