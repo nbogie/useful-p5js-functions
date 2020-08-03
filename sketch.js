@@ -84,3 +84,16 @@ function randomScreenPosition() {
 function centerScreenPos() {
     return createVector(width / 2, height / 2);
 }
+
+
+function aroundMouse(amt) {
+  return aroundPos(mousePos(), amt);
+}
+
+function aroundPos(pos, amt) {
+  let v = amt / 2;
+  return {
+    x: pos.x + random(-v, v),
+    y: pos.y + random(-v, v)
+  };
+}
