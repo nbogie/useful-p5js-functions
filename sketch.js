@@ -17,6 +17,11 @@ function withProbability(p, fn){
 	}
 }
 
+function repeat(n, fn) {
+  for (let i = 0; i < n; i++) {
+    fn();
+  }
+}
 
 //From jeremy douglass: 
 //https://discourse.processing.org/t/how-do-i-cycle-lerp-between-multiple-colors/13441/5
