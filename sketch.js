@@ -109,3 +109,16 @@ function aroundPos(pos, amt) {
     y: pos.y + random(-v, v)
   };
 }
+
+//mirrorX: position of mirror
+// where to draw (original)
+// drawFn(x, y): a callback to draw at a given x and y
+function withSymmetryAround(mirrorX, x, y, drawFn) {
+	const reflectedX = mirrorX * 2 - x;
+	if (x < mirrorX) {
+		drawFn(x, y);
+		drawFn(reflectedX, y);
+	}
+}
+
+
