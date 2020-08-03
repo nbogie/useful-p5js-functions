@@ -23,6 +23,14 @@ function repeat(n, fn) {
   }
 }
 
+//call fn n times, passing a fraction from 0 to 1
+function repeat0To1(n, fn) {
+	for (let i = 0; i < n; i++) {
+		fn(i / (n-1));
+	}
+}
+
+
 //Make an array by calling the given `makeOneFn` function `num` times.
 function makeArray(num, makeOneFn) {
 	let result = [];
