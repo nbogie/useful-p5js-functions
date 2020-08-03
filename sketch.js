@@ -1,19 +1,53 @@
 /*jslint browser: true */
-/*global color, circle,square,random, createVector,createCanvas, windowWidth, windowHeight, rectMode, CENTER, noStroke, fill, push, pop, rotate, translate, background, lerpColor, rect, ellipse, mouseX, mouseY */
+/* global background, BLEND, blendMode, CENTER, circle, color, constrain, createCanvas, createVector, ellipse, fill, fract, lerpColor, height, map, mouseX, mouseY, noLoop, norm, noStroke, pop, push, random, rect, rectMode, rotate, SCREEN, square, translate, width, windowHeight, windowWidth */
+// palettes: https://nice-colours-quicker.netlify.app/
+//           https://chromotome-quicker.netlify.app/
+// starting functions at https://github.com/nbogie/useful-p5js-functions
 "use strict";
 
+
+const palette = {
+  "name": "roygbiv-toned",
+  "colors": [
+    "#817c77",
+    "#396c68",
+    "#89e3b7",
+    "#f59647",
+    "#d63644",
+    "#893f49",
+    "#4d3240"
+  ],
+	"background": "#f2f2f2",
+  "size": 7
+}
+
 function setup() {
-	createCanvas(windowWidth, windowHeight);
-	background(100);
+	createCanvas(windowWidth*0.8, windowHeight);
+	background(palette.background);
 	rectMode(CENTER);
 	noStroke();
 }
 
 function draw() {
+	blendMode(SCREEN)
+	const bgColor = color(palette.background);
+	bgColor.setAlpha(10)
+	background(bgColor)
+	blendMode(BLEND)
 	circle(mouseX, mouseY, 20);
-	withProbability(0.015, () => rect(mouseX, mouseY, 100, 100, 5));
+	fill(random(palette.colors));
+	withProbability(0.015, () => rect(mouseX, mouseY, 100, 100, 5));	
+	const sz = mapConstrained(mouseX, 0, width, 10, 100);
+	circle(random(width), 300, sz);
 }
 
+function mapConstrained(v, inLow, inHigh, outLow, outHigh){
+	return constrain(map(v, inLow, inHigh, outLow, outHigh), outLow, outHigh);
+}
+
+function normConstrained(v, inLow, inHigh){
+	return constrain(norm(v, inLow, inHigh), 0, 1);
+}
 
 function withProbability(p, fn) {
 	if (random() < p) {
