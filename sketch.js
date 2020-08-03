@@ -23,6 +23,16 @@ function repeat(n, fn) {
   }
 }
 
+function repeatRandomChoice(n, arr) {
+	if (arr.length > 0) {
+		for (let i = 0; i < n; i++) {
+			let chosenFn = random(arr);
+			chosenFn();
+		}
+	} 
+}
+
+
 
 //call fn n times, passing a fraction from 0 to 1
 function repeat0To1(n, fn) {
@@ -40,6 +50,7 @@ function makeArray(num, makeOneFn) {
 	}
 	return result;
 }
+
 
 
 function distributeUpTo(total, max, fn) {
@@ -60,6 +71,7 @@ function distributeBetween(numSamples, min, max, fn) {
         return fn(val, ix);
     });
 }
+
 
 
 //From jeremy douglass: 
