@@ -167,3 +167,25 @@ function withSymmetryAround(mirrorX, x, y, drawFn) {
 		drawFn(reflectedX, y);
 	}
 }
+
+
+function calculateTextCenter(words) {
+	//figure the bounds for an arbitrary text size sz
+	// then see how much that needs to be scaled up (sc) to fit the width,
+	// then scale up the textSize sz *= sc
+	let sizeOfText = 100;
+	let bounds = font.textBounds(words, 0, 0, sizeOfText);
+	sizeOfText *= 0.9 * width / bounds.w;
+
+	//figure w and h to correctly position
+	bounds = font.textBounds(words, 0, 0, sizeOfText);
+	let x = width / 2 - bounds.w * 0.5;
+	let y = height / 2 + bounds.h / 2;
+	return {
+		sizeOfText,
+		pos: {
+			x,
+			y
+		}
+	};
+}
