@@ -191,10 +191,6 @@ function calculateTextCenter(words) {
 }
 
 
-function setup() {
-}
-
-
 //Find a suitable side length for a square canvas that is:
 // * Definitely small enough to fit on the current device
 // * No bigger than `mx`
