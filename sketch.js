@@ -197,11 +197,30 @@ function calculateTextCenter(words) {
 // * A multiple of `multiple`
 //
 // Example usage:
-// const dim = calcSquareCanasSideHavingMultipleAndMax(100, 600);
+// const dim = calcSquareCanvasSideHavingMultipleAndMax(100, 600);
 // createCanvas(dim, dim);
-function calcSquareCanasSideHavingMultipleAndMax(multiple, mx) {
+function calcSquareCanvasSideHavingMultipleAndMax(multiple, mx) {
 	const snapDownTo = (v, m) => m * floor(v / m);
 	const smallerSide = min(windowWidth, windowHeight);
 	const smaller = min(mx, smallerSide);
 	return snapDownTo(smaller, multiple);
+}
+
+// Example usage: 
+// let colourCycler = generateCycler([ "#774f38", "#e08e79", "#f1d4af", "#ece5ce", "#c5e0dc" ]);
+// for (let d = 600; d > 0; d -= 40){
+//   fill(colourCycler());
+//   circle(random(600), random(600), 100);
+// }
+function generateCycler(arr) {
+	let ix = 0;
+	// This function is closed over arr and ix
+	// i.e. it has access to them and can find their current values and update them.
+	// It does NOT capture the value of them when the function is created!
+	function nextFn() {
+		let res = arr[ix];
+		ix = (ix + 1) % arr.length;
+		return res;
+	}
+	return nextFn;
 }
