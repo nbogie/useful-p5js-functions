@@ -205,7 +205,7 @@ function calcSquareCanvasSideHavingMultipleAndMax(multiple, mx) {
 	const smaller = min(mx, smallerSide);
 	return snapDownTo(smaller, multiple);
 }
-
+// Creates a function that can be repeatedly called to get values pulled, cycling, from an array.
 // Example usage: 
 // let colourCycler = generateCycler([ "#774f38", "#e08e79", "#f1d4af", "#ece5ce", "#c5e0dc" ]);
 // for (let d = 600; d > 0; d -= 40){
@@ -223,4 +223,17 @@ function generateCycler(arr) {
 		return res;
 	}
 	return nextFn;
+}
+
+
+// Example usage:
+// let gen = cycleGen(["#774f38", "#e08e79", "#f1d4af", "#ece5ce", "#c5e0dc"]);
+// for (let d = 600; d > 0; d -= 40){
+// 	fill(gen.next().value);
+// 	circle(random(600), random(600), 100);
+// }
+function* cycleGenerator(arr) {
+	while (true) {
+		yield* arr;
+	}
 }
