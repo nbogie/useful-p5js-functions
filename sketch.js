@@ -237,3 +237,18 @@ function* cycleGenerator(arr) {
 		yield* arr;
 	}
 }
+function centeredTextToPoints(words, font, size) {
+	push(); // we'll want to revert our change to textFont
+	const bounds = font.textBounds(words, 0, 0, size)
+	textFont(font, size);
+	textAscent();
+	const points = font.textToPoints(words,
+		width / 2 - bounds.w / 2,
+		height / 2 + bounds.h / 2 - textDescent() / 2,
+		size, {
+			sampleFactor: 0.1,
+			simplifyThreshold: 0
+		});
+	pop();
+	return points;
+}
